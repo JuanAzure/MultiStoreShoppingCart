@@ -1,0 +1,23 @@
+﻿@using System.Security.Claims;
+
+@{
+    var user = User.FindFirst(ClaimTypes.Name);
+    var role = User.FindFirst(ClaimTypes.Role);
+
+}
+@if (role.Value.Equals("Admin"))
+{
+    <a asp-area="admin" asp-controller="login" asp-action="profile" class="d-block">@user.Value</a>
+    <br />
+    <a asp-area="admin" asp-controller="login" asp-action="logout" class="d-block">logout</a>
+
+}
+else if (role.Value.Equals("Vendor"))
+{
+    <a asp-area="vendor" asp-controller="login" asp-action="profile" class="d-block">@user.Value</a>
+}
+else if (role.Value.Equals("Customer"))
+{
+    <a asp-area="customer" asp-controller="login" asp-action="profile" class="d-block">@user.Value</a>
+}
+
